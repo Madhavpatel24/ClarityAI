@@ -1,0 +1,17 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Environment
+.env
+
+# Database (optional — keep if you want local dev DB)
+clarity.db
+
+# Uploaded files (optional)
+storage/
+stored_documents/
+
+# OS
+.DS_Store
