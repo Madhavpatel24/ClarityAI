@@ -24,10 +24,12 @@ export default function SignupForm() {
       form.append("email", email)
       form.append("password", password)
 
-      const res = await fetch("http://localhost:8000/api/signup", {
+      const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL!;
+
+      const res = await fetch(`${API_BASE_URL}/signup`, {
         method: "POST",
         body: form
-      })
+      });
 
       if (!res.ok) {
         const err = await res.json()

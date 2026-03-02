@@ -57,23 +57,40 @@ export default function ResultsPage() {
     );
   }
 
-  const handleDownload = () => {
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL!;
+
+const handleDownload = async () => {
+  try {
     const token = localStorage.getItem("clarity_token");
 
-    fetch(`http://127.0.0.1:8000/api/report/${results.firebase_id}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((response) => response.blob())
-      .then((blob) => {
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "CLARITY_Full_Audit_Report.pdf";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-      });
-  };
+    const response = await fetch(
+      `${API_BASE_URL}/report/${results.firebase_id}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to download report");
+    }
+
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "CLARITY_Full_Audit_Report.pdf";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  } catch (err) {
+    console.error(err);
+    alert("Download failed. Please try again.");
+  }
+};
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-background via-muted/30 to-background">

@@ -161,7 +161,7 @@ export default function HistoryPage() {
                     {/* RIGHT → ACTIONS */}
                     <div className="flex flex-col gap-3">
                       <Link href={`/results/${entry.firebase_id}`}>
-                        <Button variant="outline">View</Button>
+                        <Button variant="outline" className='className="h-fit border-primary text-primary hover:bg-primary hover:text-white hover:border-primary transition-colors duration-200"'>View</Button>
                       </Link>
 
                       <Button

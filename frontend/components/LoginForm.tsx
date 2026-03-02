@@ -24,11 +24,12 @@ export default function LoginForm() {
       form.append("email", email)
       form.append("password", password)
 
-      const res = await fetch("http://localhost:8000/api/login", {
+      const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL!;
+
+      const res = await fetch(`${API_BASE_URL}/login`, {
         method: "POST",
         body: form
-      })
-
+});
       if (!res.ok) {
         const err = await res.json()
         throw new Error(err.detail || "Login failed")
