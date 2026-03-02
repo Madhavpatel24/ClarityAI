@@ -1,18 +1,4 @@
-<<<<<<< HEAD
-node_modules
-.next
-.env
-.env.local
-dist
-=======
-# v0 runtime files
-__v0_runtime_loader.js
-__v0_devtools.tsx
-__v0_jsx-dev-runtime.ts
-
-# Common ignores
 node_modules/
 .next/
-.env*.local
+.env*
 .DS_Store
->>>>>>> 4dca0bbbea1b49a419e47f064f08524d394b39d6

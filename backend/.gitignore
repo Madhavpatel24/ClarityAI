@@ -1,17 +1,22 @@
 # Python
-venv/
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 
-# Environment
+# Virtual env
+venv/
 .env
 
-# Database (optional — keep if you want local dev DB)
-clarity.db
+# Database
+*.db
 
-# Uploaded files (optional)
+# Uploaded files
+inputs/
 storage/
-stored_documents/
 
-# OS
+# Secrets
+firebase-admin.json
+
+# OS junk
 .DS_Store
