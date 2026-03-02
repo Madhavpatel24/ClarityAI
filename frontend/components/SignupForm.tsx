@@ -105,73 +105,80 @@ export default function SignupForm() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-primary via-indigo-500 to-purple-500 p-4">
-      <Card className="w-full max-w-md backdrop-blur-xl bg-white/20 border-white/30 shadow-2xl">
-        <CardHeader className="text-center space-y-2">
-          <CardTitle className="text-3xl bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent font-bold">
-            Create Account
-          </CardTitle>
-          <p className="text-white/80 text-sm">Join Clarity AI today</p>
-        </CardHeader>
+    <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-background">
+      {/* Background Gradient Glow */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-indigo-500/10 to-violet-500/20 blur-3xl opacity-60" />
 
-        <CardContent className="space-y-6 p-8">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {error && (
-              <div className="p-4 bg-red-500/20 border border-red-500/50 rounded-xl backdrop-blur-sm">
-                <p className="text-red-100 text-sm font-medium">{error}</p>
-              </div>
-            )}
+      <div className="relative z-10 w-full max-w-md px-4">
+        {/* Branding */}
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-primary via-indigo-500 to-violet-500 bg-clip-text text-transparent">
+            CLARITY
+          </h1>
+          <p className="text-muted-foreground text-sm mt-2">
+            RBI Compliance Intelligence Platform
+          </p>
+        </div>
 
-            <div className="space-y-4">
-              <div>
-                <Input 
-                  type="email" 
-                  placeholder="Enter your email" 
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="h-12 text-lg bg-white/70 backdrop-blur-sm border-white/50 focus:border-white focus:ring-white/50 shadow-lg hover:shadow-xl transition-all duration-300"
-                />
-              </div>
+        {/* Glass Card */}
+        <Card className="backdrop-blur-xl bg-card/70 border border-border/40 shadow-2xl">
+          <CardHeader>
+            <CardTitle className="text-2xl text-center">
+              Create Account
+            </CardTitle>
+          </CardHeader>
 
-              <div>
-                <Input 
-                  type="password" 
-                  placeholder="Create strong password" 
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  className="h-12 text-lg bg-white/70 backdrop-blur-sm border-white/50 focus:border-white focus:ring-white/50 shadow-lg hover:shadow-xl transition-all duration-300"
-                />
-              </div>
-            </div>
-
-            <Button 
-              type="submit" 
-              className="w-full h-14 text-lg font-semibold bg-white/90 hover:bg-white backdrop-blur-xl shadow-2xl hover:shadow-3xl transform hover:-translate-y-0.5 transition-all duration-300 border-2 border-white/50"
-              disabled={isLoading}
-            >
-              {isLoading ? (
-                <span className="flex items-center gap-2">
-                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  Creating Account...
-                </span>
-              ) : (
-                "Sign Up"
+          <CardContent>
+            <form onSubmit={handleSubmit} className="space-y-5">
+              {error && (
+                <div className="p-3 text-sm bg-red-50 border border-red-200 text-red-600 rounded-md">
+                  {error}
+                </div>
               )}
-            </Button>
-          </form>
 
-          <div className="text-center pt-4">
-            <p className="text-white/70 text-sm">
+              <Input
+                type="email"
+                placeholder="Email Address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="h-11"
+                required
+              />
+
+              <Input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="h-11"
+                required
+              />
+
+              <Button
+                type="submit"
+                disabled={isLoading}
+                className="w-full h-11 text-base font-semibold shadow-lg shadow-primary/25"
+              >
+                {isLoading ? "Creating Account..." : "Sign Up"}
+              </Button>
+            </form>
+
+            <p className="text-sm mt-6 text-center text-muted-foreground">
               Already have an account?{" "}
-              <Link href="/login" className="text-white font-semibold hover:text-white/90 underline underline-offset-2 transition-colors">
+              <Link
+                href="/login"
+                className="text-primary font-medium hover:underline"
+              >
                 Login
               </Link>
             </p>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+
+        <p className="text-xs text-center text-muted-foreground mt-6">
+          Secure access powered by JWT Authentication
+        </p>
+      </div>
     </div>
   )
 }

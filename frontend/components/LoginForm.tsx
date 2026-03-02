@@ -93,7 +93,7 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-indigo-500/10 to-violet-500/20 blur-3xl opacity-60">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-primary via-indigo-500 to-purple-500 p-4">
       <Card className="w-full max-w-md backdrop-blur-xl bg-white/20 border-white/30 shadow-2xl">
         <CardHeader className="text-center space-y-2">
           <CardTitle className="text-3xl bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent font-bold">
