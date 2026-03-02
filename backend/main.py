@@ -90,7 +90,7 @@ app = FastAPI(title="🚀 CLARITY - RBI Compliance")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://clarity-ai-murex.vercel.app/", "http://localhost:3000"],  # Add your Vercel URL
+    allow_origins=["https://clarity-ai-murex.vercel.app", "http://localhost:3000"],  # Add your Vercel URL
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
