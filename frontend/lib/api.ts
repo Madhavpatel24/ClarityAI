@@ -113,3 +113,39 @@ export async function deleteHistoryItem(id: string) {
 
   return res.json();
 }
+
+export async function loginUser(email: string, password: string) {
+  const form = new FormData();
+  form.append("email", email);
+  form.append("password", password);
+
+  const res = await fetch(`${API_BASE_URL}/login`, {
+    method: "POST",
+    body: form, // ⚠️ DO NOT set headers for FormData
+  });
+
+  if (!res.ok) {
+    const err = await res.json();
+    throw new Error(err.detail || "Login failed");
+  }
+
+  return res.json();
+}
+
+export async function signupUser(email: string, password: string) {
+  const form = new FormData();
+  form.append("email", email);
+  form.append("password", password);
+
+  const res = await fetch(`${API_BASE_URL}/signup`, {
+    method: "POST",
+    body: form,
+  });
+
+  if (!res.ok) {
+    const err = await res.json();
+    throw new Error(err.detail || "Signup failed");
+  }
+
+  return res.json();
+}

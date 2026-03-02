@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { loginUser } from "@/lib/api";
+
 
 export default function LoginForm() {
   const [email, setEmail] = useState('')
@@ -14,38 +16,16 @@ export default function LoginForm() {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
 
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
     setIsLoading(true)
 
-    try {
-      const form = new FormData()
-      form.append("email", email)
-      form.append("password", password)
 
-      const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL!;
-
-      const res = await fetch(`${API_BASE_URL}/login`, {
-        method: "POST",
-        body: form
-});
-      if (!res.ok) {
-        const err = await res.json()
-        throw new Error(err.detail || "Login failed")
-      }
-
-      const data = await res.json()
-
-      localStorage.setItem("clarity_token", data.access_token)
-
-      router.push("/")
-    } catch (err: any) {
-      setError(err.message)
-    } finally {
-      setIsLoading(false)
-    }
-  }
+const data = await loginUser(email, password);
+localStorage.setItem("clarity_token", data.access_token);
+router.push("/");
 
   return (
     <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-background">
@@ -121,4 +101,4 @@ export default function LoginForm() {
       </div>
     </div>
   )
-}
+}}

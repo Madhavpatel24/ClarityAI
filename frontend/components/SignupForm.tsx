@@ -6,12 +6,14 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { signupUser } from '@/lib/api'
 
 export default function SignupForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+
   const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -20,26 +22,13 @@ export default function SignupForm() {
     setIsLoading(true)
 
     try {
-      const form = new FormData()
-      form.append("email", email)
-      form.append("password", password)
+      await signupUser(email, password)
 
-      const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL!;
-
-      const res = await fetch(`${API_BASE_URL}/signup`, {
-        method: "POST",
-        body: form
-      });
-
-      if (!res.ok) {
-        const err = await res.json()
-        throw new Error(err.detail || "Signup failed")
-      }
-
-      router.push("/login")
+      // Redirect after successful signup
+      router.push('/login')
 
     } catch (err: any) {
-      setError(err.message)
+      setError(err.message || 'Signup failed')
     } finally {
       setIsLoading(false)
     }
@@ -63,7 +52,7 @@ export default function SignupForm() {
           </p>
         </div>
 
-        {/* Glass Card */}
+        {/* Card */}
         <Card className="backdrop-blur-xl bg-card/70 border border-border/40 shadow-2xl">
           <CardHeader>
             <CardTitle className="text-2xl text-center">
@@ -100,15 +89,20 @@ export default function SignupForm() {
 
               <Button
                 type="submit"
+                disabled={isLoading}
                 className="w-full h-11 text-base font-semibold shadow-lg shadow-primary/25"
               >
-                {isLoading ? "Creating Account..." : "Sign Up"}
+                {isLoading ? 'Creating Account...' : 'Sign Up'}
               </Button>
+
             </form>
 
             <p className="text-sm mt-6 text-center text-muted-foreground">
-              Already have an account?{" "}
-              <Link href="/login" className="text-primary font-medium hover:underline">
+              Already have an account?{' '}
+              <Link
+                href="/login"
+                className="text-primary font-medium hover:underline"
+              >
                 Sign In
               </Link>
             </p>
