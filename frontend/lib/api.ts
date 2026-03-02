@@ -141,7 +141,7 @@ export async function loginUser(email: string, password: string) {
   form.append("email", email);
   form.append("password", password);
 
-  const res = await fetch(`${API_BASE_URL}/api/login`, {
+  const res = await fetch(`${API_BASE_URL}/login`, {
     method: "POST",
     body: form,
   });
@@ -151,9 +151,5 @@ export async function loginUser(email: string, password: string) {
     throw new Error(err.detail || "Login failed");
   }
 
-  const data = await res.json();
-
-  localStorage.setItem("clarity_token", data.access_token);
-
-  return data;
+  return res.json();
 }
