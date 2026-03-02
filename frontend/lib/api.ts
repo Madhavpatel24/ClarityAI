@@ -1,28 +1,6 @@
 import { AnalysisRequest, AnalysisResponse, AnalysisResult } from './types';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
-
-// export async function analyzePolicy(request: AnalysisRequest): Promise<AnalysisResponse> {
-//   try {
-//     const response = await fetch(`${API_BASE_URL}/analyze`, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify(request),
-//     });
-
-//     if (!response.ok) {
-//       throw new Error(`API error: ${response.statusText}`);
-//     }
-
-//     const data = await response.json();
-//     return data;
-//   } catch (error) {
-//     console.error('Error analyzing policy:', error);
-//     throw error;
-//   }
-// }
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://clarity-j7f2.onrender.com/';
 
 export async function analyzePolicy(formData: FormData) {
   const token = localStorage.getItem("clarity_token")
