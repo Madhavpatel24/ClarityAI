@@ -1,6 +1,6 @@
 import { AnalysisRequest, AnalysisResponse, AnalysisResult } from './types';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://clarity-j7f2.onrender.com/';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL!;
 
 export async function analyzePolicy(formData: FormData) {
   const token = localStorage.getItem("clarity_token")
