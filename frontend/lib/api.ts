@@ -123,7 +123,7 @@ export async function signupUser(email: string, password: string) {
   form.append("email", email);
   form.append("password", password);
 
-  const res = await fetch(`${API_BASE_URL}/api/signup`, {
+  const res = await fetch(`${API_BASE_URL}/signup`, {
     method: "POST",
     body: form,
   });
